@@ -9,23 +9,7 @@ import {
 import { Browser, Page, chromium, expect } from "@playwright/test";
 import { WorldPage } from "../../../pages/worldPage";
 import { QuotesPage } from "../../../pages/quotesPage";
-
-let page: Page;
-let browser: Browser;
-let worldPage: WorldPage;
-let quotesPage: QuotesPage;
-
-Before(async function () {
-  browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext();
-  page = await context.newPage();
-  worldPage = new WorldPage(page);
-  quotesPage = new QuotesPage(page);
-});
-
-After(async function () {
-  await browser.close();
-});
+import { page, worldPage, quotesPage } from "../hooks/hooks";
 
 Given("User navigates to CNBC website", { timeout: 60000 }, async function () {
   await page.goto("https://www.cnbc.com/");
